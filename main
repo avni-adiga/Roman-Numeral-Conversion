@@ -1,0 +1,108 @@
+import java.util.Scanner;
+import java.io.*;
+// What import statements do you need?  Add those here
+
+
+/**
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class MyProgram
+
+{
+    /**************************************/
+    /** Write method main here           **/
+    /**************************************/
+    public static void main (String [] args) throws IOException
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        
+        System.out.println("Please enter the name of the data file to use: ");
+        String name = sc.nextLine();
+        File data = new File(name);
+        
+        Scanner use = new Scanner(data);
+        while(use.hasNext())
+        {
+            int old = use.nextInt();
+            if(old > 99 || old < 1)
+            {
+                System.out.println("Invalid Number Encountered");
+            }
+            else
+            {
+                System.out.println("Decimal Number: " + old);
+                String romanNum = convertToRoman(old);
+                System.out.println("In Roman Numerals: " + romanNum + "\n");
+            }
+        }
+        
+        use.close();
+        
+        System.out.println("Program Complete.");
+    }
+    
+    /**
+     * Method Name: convertToRoman
+     * Description: takes an integer, converts it to Roman numeral
+     *              format and returns the result
+     * @param: int - the number to be converted
+     * @return: String - a Roman numeral 
+     * @precondition: the given number will be between 1 and 99 
+     *                  inclusive
+     */
+    
+    /**************************************/
+    /** Write method convertToRoman here **/
+    /**************************************/
+    
+    public static String convertToRoman(int old)
+    {
+        String romanNum = "";
+        while(old != 0)
+        {
+            if(old >= 90)
+            {
+                romanNum += "XC";
+                old -= 90;
+            }
+            else if(old >= 50)
+            {
+                romanNum += "L";
+                old -= 50;
+            }
+            else if(old >= 40)
+            {
+                romanNum += "XL";
+                old -= 40;
+            }
+            else if(old >= 10)
+            {
+                romanNum += "X";
+                old -= 10;
+            }
+            else if(old >= 9)
+            {
+                romanNum += "IX";
+                old -= 9;
+            }
+            else if(old >= 5)
+            {
+                romanNum += "V";
+                old -= 5;
+            }
+            else if(old >= 4)
+            {
+                romanNum += "IV";
+                old -= 4;
+            }
+            else if(old >= 1)
+            {
+                romanNum += "I";
+                old -= 1;
+            }
+        }
+        return romanNum;
+    }
+}
